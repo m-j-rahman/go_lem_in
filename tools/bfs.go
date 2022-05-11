@@ -10,9 +10,9 @@ type Array []string
 var pathArray Array
 
 // Used in func pathFinder
-func (arr Array) hasPropertyOf(str string) bool {
-	for _, v := range arr {
-		if str == v {
+func (arr Array) hasProp(str string) bool {
+	for _, x := range arr {
+		if str == x {
 			return true
 		}
 	}
@@ -32,10 +32,10 @@ func pathFinder(graph *Graph, start string, end string, path Array) Array {
 	}
 	optimal := make([]string, 0)
 	for _, node := range graph.FindRoom(start).Adjacent {
-		if !path.hasPropertyOf(node) && !graph.isVisited(node) {
+		if !path.hasProp(node) && !graph.isVisited(node) {
 			newPath := pathFinder(graph, node, end, path)
 			if len(newPath) > 0 {
-				if newPath.hasPropertyOf(graph.StartRoom) && newPath.hasPropertyOf(end) {
+				if newPath.hasProp(graph.StartRoom) && newPath.hasProp(end) {
 					pathArray = append(pathArray, fmt.Sprint(newPath))
 					if len(optimal) == 0 || (len(newPath) < len(optimal)) {
 						optimal = newPath

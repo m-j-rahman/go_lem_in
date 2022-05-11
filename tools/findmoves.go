@@ -6,24 +6,24 @@ import (
 )
 
 func FindMoves(n int, pathList []string) []string {
-	pathListStore := [][]string{}
+	listKeeper := [][]string{}
 
 	for _, v := range pathList {
 		s := strings.Split(v, "-")
-		pathListStore = append(pathListStore, s)
+		listKeeper = append(listKeeper, s)
 	}
 
-	lenP := len(pathList)
+	lenPL := len(pathList)
 
-	queue := make([][]string, lenP)
+	queue := make([][]string, lenPL)
 
 	x := 0
 
 	for i := 1; i <= n; i++ {
 		ant := strconv.Itoa(i)
 
-		if x == lenP-1 {
-			if len(pathListStore[x])+len(queue[x]) <= len(pathListStore[0])+len(queue[0]) {
+		if x == lenPL-1 {
+			if len(listKeeper[x])+len(queue[x]) <= len(listKeeper[0])+len(queue[0]) {
 				queue[x] = append(queue[x], ant)
 			} else {
 				x = 0
@@ -31,7 +31,7 @@ func FindMoves(n int, pathList []string) []string {
 			}
 
 		} else {
-			if len(pathListStore[x])+len(queue[x]) <= len(pathListStore[x+1])+len(queue[x+1]) {
+			if len(listKeeper[x])+len(queue[x]) <= len(listKeeper[x+1])+len(queue[x+1]) {
 				queue[x] = append(queue[x], ant)
 			} else {
 				x++
@@ -66,7 +66,7 @@ func FindMoves(n int, pathList []string) []string {
 
 		for _, a := range queue[i] {
 			adder := []string{}
-			for _, room := range pathListStore[i] {
+			for _, room := range listKeeper[i] {
 				str := "L" + a + "-" + room
 				adder = append(adder, str)
 			}
