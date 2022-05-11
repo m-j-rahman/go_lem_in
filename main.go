@@ -9,6 +9,7 @@ import (
 
 func main() {
 	if len(os.Args) == 2 {
+
 		file, err := os.Open("maps/" + os.Args[1])
 		if err != nil {
 			fmt.Println(err)
@@ -18,13 +19,13 @@ func main() {
 
 		scanner := bufio.NewScanner(file)
 		scanner.Split(bufio.ScanLines)
-
 		for scanner.Scan() {
 			x := scanner.Text()
 			fmt.Println(x)
 		}
 
 		tools.SendAnts()
+
 	} else {
 		fmt.Println("ERROR: invalid data format - wrong number of arguments.")
 		fmt.Println("Usage example: go run . example00.txt")
