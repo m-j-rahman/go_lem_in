@@ -62,7 +62,7 @@ func BFS(start, end string, g *Graph, paths *[]string, f func(graph *Graph, star
 		//Find all possible paths with unvisited rooms
 		pathFinder(g, g.StartRoom, g.EndRoom, shortPath)
 
-		// Get the value string of the shortest path
+		// Get the string of the shortest path
 		var shortStorer string
 		if len(pathArray) != 0 {
 			shortStorer = pathArray[0]
@@ -83,7 +83,6 @@ func BFS(start, end string, g *Graph, paths *[]string, f func(graph *Graph, star
 		shortStorerSlc := strings.Split(shortStorer, " ")
 		shortStorerSlc = shortStorerSlc[1:]
 
-		//Loop through the path and mark as visited
 		for z := 0; z < len(shortStorerSlc)-1; z++ {
 			g.FindRoom(shortStorerSlc[z]).Visited = true
 		}

@@ -15,7 +15,6 @@ func DFS(current, end string, g *Graph, path string, pathList *[]string) {
 		path += current + "-"
 	}
 
-	//Create bool var to to be true if the current room == end
 	final := false
 
 	if current == end {
@@ -40,7 +39,7 @@ func DFS(current, end string, g *Graph, path string, pathList *[]string) {
 	// Check if the end room is adjacent to the current room
 	for i := 0; i < len(now.Adjacent); i++ {
 
-		// If the end room is present in the adjacent room move it to the start of the slice
+		// If the end room is adjacent, make it first in the slice
 		if now.Adjacent[i] == g.EndRoom {
 			now.Adjacent[0], now.Adjacent[i] = now.Adjacent[i], now.Adjacent[0]
 		}
@@ -50,7 +49,7 @@ func DFS(current, end string, g *Graph, path string, pathList *[]string) {
 		if now.Adjacent[i] == "" {
 			continue
 		}
-		//Get information for the current room
+
 		x := g.FindRoom(now.Adjacent[i])
 
 		if x.Visited {

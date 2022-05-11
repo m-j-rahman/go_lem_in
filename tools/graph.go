@@ -43,36 +43,36 @@ func exists(s []string, name string) bool {
 }
 
 // Adds tunnels (edges) between rooms (nodes) in graph
-func (g *Graph) AddTunnels(from, to string) {
-	fromRoom := g.FindRoom(from)
-	toRoom := g.FindRoom(to)
+func (g *Graph) AddTunnels(fromRoom, toRoom string) {
+	from := g.FindRoom(fromRoom)
+	to := g.FindRoom(toRoom)
 
 	// Check if a room doesn't exist and send error
-	if fromRoom == nil || toRoom == nil {
+	if from == nil || to == nil {
 		err := fmt.Errorf("Room doesn't exist (%v --- %v)", from, to)
 		fmt.Println(err.Error())
 
 		// Check if a link already exists and send error
-	} else if exists(fromRoom.Adjacent, to) || exists(toRoom.Adjacent, from) {
+	} else if exists(from.Adjacent, toRoom) || exists(to.Adjacent, fromRoom) {
 		err := fmt.Errorf("Link already exists (%v --- %v)", from, to)
 		fmt.Println(err.Error())
 
 		//Check for start room and end room
-	} else if fromRoom.RoomName == g.StartRoom {
-		fromRoom.Adjacent = append(fromRoom.Adjacent, toRoom.RoomName)
+	} else if from.RoomName == g.StartRoom {
+		from.Adjacent = append(from.Adjacent, to.RoomName)
 
-	} else if toRoom.RoomName == g.StartRoom {
-		toRoom.Adjacent = append(toRoom.Adjacent, fromRoom.RoomName)
+	} else if to.RoomName == g.StartRoom {
+		to.Adjacent = append(to.Adjacent, from.RoomName)
 
-	} else if fromRoom.RoomName == g.EndRoom {
-		toRoom.Adjacent = append(toRoom.Adjacent, fromRoom.RoomName)
+	} else if from.RoomName == g.EndRoom {
+		to.Adjacent = append(to.Adjacent, from.RoomName)
 
-	} else if toRoom.RoomName == g.EndRoom {
-		fromRoom.Adjacent = append(fromRoom.Adjacent, toRoom.RoomName)
+	} else if to.RoomName == g.EndRoom {
+		from.Adjacent = append(from.Adjacent, to.RoomName)
 
-	} else if fromRoom.RoomName != g.EndRoom && toRoom.RoomName != g.EndRoom {
-		fromRoom.Adjacent = append(fromRoom.Adjacent, toRoom.RoomName)
-		toRoom.Adjacent = append(toRoom.Adjacent, fromRoom.RoomName)
+	} else if from.RoomName != g.EndRoom && to.RoomName != g.EndRoom {
+		from.Adjacent = append(from.Adjacent, to.RoomName)
+		to.Adjacent = append(to.Adjacent, from.RoomName)
 	}
 
 }

@@ -48,15 +48,15 @@ func SendAnts() {
 	DFSearch := FindMoves(antNum, DFSPaths)
 	BFSearch := FindMoves(antNum, BFSPaths)
 
-	Printer := []string{}
+	antPrint := []string{}
 
 	if len(DFSearch) < len(BFSearch) {
-		Printer = DFSearch
+		antPrint = DFSearch
 	} else {
-		Printer = BFSearch
+		antPrint = BFSearch
 	}
 	fmt.Println()
-	for _, step := range Printer {
+	for _, step := range antPrint {
 		fmt.Println(step)
 	}
 

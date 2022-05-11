@@ -74,15 +74,16 @@ func FindMoves(n int, pathList []string) []string {
 
 		}
 	}
-	finalMoves := []string{}
+
+	foundMoves := []string{}
 
 	for _, paths := range container {
 		for j, moves := range paths {
 			for k, room := range moves {
-				if j+k > len(finalMoves)-1 {
-					finalMoves = append(finalMoves, room+" ")
+				if j+k > len(foundMoves)-1 {
+					foundMoves = append(foundMoves, room+" ")
 				} else {
-					finalMoves[j+k] += room + " "
+					foundMoves[j+k] += room + " "
 				}
 			}
 
@@ -90,6 +91,6 @@ func FindMoves(n int, pathList []string) []string {
 
 	}
 
-	return finalMoves
+	return foundMoves
 
 }
